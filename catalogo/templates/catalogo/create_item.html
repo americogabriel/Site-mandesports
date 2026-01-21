@@ -6,6 +6,10 @@
     <title>Criar Item</title>
 </head>
 <body>
-    {{form}}
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit"> Criar </button>
+    </form>
 </body>
 </html>
