@@ -1,4 +1,5 @@
 from django.shortcuts import render,get_object_or_404, redirect
+from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.http.response import HttpResponse
 from django.views.generic import FormView,ListView, DetailView , CreateView , View
@@ -28,7 +29,12 @@ class CreateProdutos(FormView):
 class CreateCarrinho(View):
     def post(self,request,pk):
         item = get_object_or_404(Item,pk = pk)
-        Carrinho.objects.create(item=item)
+        objeto,create = Carrinho.objects.get_or_create(item=item) ## Se o objeto foi criado agora o create retorna True, caso contrario retorna False
+
+        if not create:
+            messages.warning(request,"Este Item já está em seu carrinho")
+        else:
+            messages.success(request,"Item adicionado ao carrinho com sucesso ✅")
 
         return redirect('url_item_detail', pk = pk)
     

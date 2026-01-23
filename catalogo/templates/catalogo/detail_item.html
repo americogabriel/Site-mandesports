@@ -158,6 +158,15 @@
                 </form>
                 <a href="{% url 'url_home' %}" class="btn btn-secondary">Voltar</a>
             </div>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="message {{message.tags}}">
+                    {{message}}
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         </div>
     </div>
 </div>
