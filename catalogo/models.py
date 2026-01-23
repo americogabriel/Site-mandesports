@@ -14,6 +14,7 @@ class Item(models.Model):
         return self.nome
 
 class Carrinho(models.Model):
+    session_key = models.CharField()
     item = models.ForeignKey(Item,on_delete=(models.CASCADE))
 
     class Meta:
