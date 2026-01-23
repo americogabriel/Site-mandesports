@@ -152,7 +152,10 @@
             </p>
 
             <div class="actions">
-                <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                <form method="POST" action="{% url 'url_addcarrinho' Item.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Adicionar ao carrinho</button>
+                </form>
                 <a href="{% url 'url_home' %}" class="btn btn-secondary">Voltar</a>
             </div>
         </div>

@@ -7,5 +7,17 @@ class Item(models.Model):
     descricao = models.TextField()
     imagem = models.URLField()
 
+    class Meta:
+        verbose_name_plural = "Itens"
+        
+    def __str__(self):
+        return self.nome
+
 class Carrinho(models.Model):
     item = models.ForeignKey(Item,on_delete=(models.CASCADE))
+
+    class Meta:
+        verbose_name_plural = "Carrinho"
+
+    def __str__(self):
+        return self.item.nome
