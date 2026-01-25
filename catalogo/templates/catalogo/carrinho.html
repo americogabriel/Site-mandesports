@@ -148,7 +148,7 @@
 
 <header>
     <a href="{% url 'url_home' %}">
-        <h1>Carrinho</h1>
+        <h1>🛒</h1>
     </a>
 </header>
 
@@ -161,7 +161,6 @@
 {% endif %}
 
 <div class="container">
-
     {% for carrinho in Carrinhos %}
         <div class="carrinho-item">
 
@@ -186,6 +185,13 @@
     {% endfor %}
 
 </div>
+    <hr></hr>
+    {% if valor_total %}
+        <h2>Valor Final: R$ {{ valor_total }}</h2>
+    {% else %}
+        <h2>Valor Final: R$ 0</h2>
+    {% endif %}
+    
 
 
 </body>

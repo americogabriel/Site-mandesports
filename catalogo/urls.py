@@ -1,13 +1,16 @@
 from django.contrib import admin
 from django.urls import path
-from .views import Home, CreateProdutos, ItemDetail, CreateCarrinho, ListarCarrinho, RemoverCarrinho
+from .views import Home, CreateItem, UpdateItem, ItemDetail, CreateCarrinho, ListarCarrinho, RemoverCarrinho, ListItem, DeletarItem
 
 
 urlpatterns = [
     path('',Home.as_view(), name='url_home'),
-    path('createitem/',CreateProdutos.as_view(), name= 'url_createitem'),
+    path('createitem/',CreateItem.as_view(), name='url_createitem'),
+    path('updateitem/<int:pk>',UpdateItem.as_view(), name ='url_updateitem'),
+    path('listaritem/',ListItem.as_view(), name='url_listaritem'),
+    path('deletaritem/<int:pk>',DeletarItem.as_view(), name='url_deletaritem'),
     path('detail/<int:pk>/',ItemDetail.as_view(), name='url_item_detail'),
     path('addcarrinho/<int:pk>',CreateCarrinho.as_view(), name='url_addcarrinho'),
     path('removercarrinho/<int:pk>',RemoverCarrinho.as_view(), name = "url_removercarrinho"),
-    path('carrinho/',ListarCarrinho.as_view(),name="url_carrinho")
+    path('carrinho/',ListarCarrinho.as_view(), name="url_carrinho")
 ]
