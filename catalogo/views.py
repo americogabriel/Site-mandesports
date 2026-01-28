@@ -6,13 +6,14 @@ from django.views.generic import FormView,ListView, DetailView , CreateView , Vi
 from .models import Item,Carrinho
 from .form import ItemForm
 from .permissions import SuperAdminRequiredMixin
+from urllib.parse import quote
 
 class Home(ListView):
     model = Item
     template_name = 'catalogo/home.html'
     context_object_name = 'itens'
 
-
+#----ITEM----
 class ItemDetail(DetailView):
     model = Item
     template_name = 'catalogo/detail_item.html'
@@ -21,13 +22,13 @@ class ItemDetail(DetailView):
 class CreateItem(SuperAdminRequiredMixin, FormView):
     form_class = ItemForm
     template_name = 'catalogo/create_item.html'
-    success_url = reverse_lazy('url_home')
+    success_url = reverse_lazy('url_listaritem')
     
 class UpdateItem(SuperAdminRequiredMixin,UpdateView):
     model = Item
     form_class = ItemForm
     template_name = 'catalogo/create_item.html'
-    success_url = reverse_lazy('url_home')
+    success_url = reverse_lazy('url_listaritem')
 
 
     def form_valid(self, form):
@@ -47,6 +48,7 @@ class DeletarItem(SuperAdminRequiredMixin,View):
             obj.delete()
             messages.success(request,"Item deletetado com sucesso")
 
+#----CARRINHO----
 class CreateCarrinho(View):
     def post(self,request,pk):
         if not request.session.session_key:
@@ -69,16 +71,22 @@ class ListarCarrinho(ListView):
     context_object_name = 'Carrinhos'
 
     def get_queryset(self):
-        return super().get_queryset()
+        return Carrinho.objects.filter(session_key = self.request.session.session_key)
     
     def get_context_data(self, **kwargs):
         carrinho = self.get_queryset() # Retorna a Lista com todos os itens do carrinho
         context = super().get_context_data(**kwargs)
-
+        mensagem = "Olá! Tenho interesse nos seguintes itens:\n\n"
+        numero_empresa = "558399290264"
         valor_total = 0
+
         for item in carrinho:
+            mensagem += f"-{item.item.nome}- R${item.item.preço}\n"
             valor_total += item.item.preço
 
+        mensagem += f"\nValor Total: R${valor_total}"
+        mensagem_codificada = quote(mensagem)
+        context['mensagem_url'] = f"https://wa.me/{numero_empresa}?text={mensagem_codificada}"
         context['valor_total'] = valor_total
         return context
 
