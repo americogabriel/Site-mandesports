@@ -6,25 +6,28 @@
     <title>Surf Shop</title>
 
     <style>
+        /* RESET + BASE */
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background-color: #F1EEDC;
 
-            min-height: 100vh ;
-            display: flex ;
-            flex-direction: column;
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         /* HEADER */
         header {
             background: linear-gradient(180deg, #0A4D68, #00B4D8);
             padding: 20px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             position: relative;
         }
 
@@ -32,34 +35,63 @@
             max-height: 140px;
         }
 
-        /* LINK DO CARRINHO */
         .cart-link {
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #FF6B35;
+            color: #FFFFFF;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
 
-        background-color: #FF6B35;
-        color: #FFFFFF;
+        .cart-link:hover {
+            background-color: #ff5722;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
 
-        padding: 10px 18px;
-        border-radius: 25px;
-
-        font-weight: bold;
-        font-size: 0.95rem;
-
-        transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-    }
-
-    .cart-link:hover {
-        background-color: #ff5722;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-    }
-
-
-        /* CONTAINER DOS PRODUTOS */
+        /* CONTAINER PRINCIPAL */
         .container {
-            flex: 1;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background-color: #e4e3e3;
+            color: #000000;
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+
+        .sidebar a {
+            color: #000000;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: #00B4D8;
+            transform: translateX(4px);
+        }
+
+        /* CARDS */
+        .cards {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
@@ -68,7 +100,6 @@
             gap: 30px;
         }
 
-        /* CARD */
         .card {
             background-color: #FFFFFF;
             border-radius: 12px;
@@ -105,46 +136,65 @@
             font-size: 1.2rem;
         }
 
-        a {
-            text-decoration: none;
-        }
-
         /* FOOTER */
         footer {
-            margin-top: 50px;
             padding: 20px;
             text-align: center;
-            background-color: #0A4D68;
+            background: linear-gradient(180deg, #0A4D68, #00B4D8);
             color: #FFFFFF;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .sidebar h2 {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
 <header>
-    <img src="https://media-for2-1.cdn.whatsapp.net/v/t61.24694-24/118251825_1405824496288734_8215474057204007167_n.jpg?ccb=11-4&oh=01_Q5Aa3gHzdQujrWzgAupTeCepWIfcglkUShHJhIiNbY51Igr36A&oe=697589B1&_nc_sid=5e03e0&_nc_cat=105" alt="Logo Surf Shop">
+    <img src="https://mail.google.com/mail/u/0?ui=2&ik=01b5eb7e5f&attid=0.1&permmsgid=msg-f:1855615897135700768&th=19c078d3b4575b20&view=fimg&fur=ip&permmsgid=msg-f:1855615897135700768&sz=s0-l75-ft&attbid=ANGjdJ-7WNr5Krm3DHB8eUuOYvtvl8wMrV8y1Pyfa7SA1NBlC_LtUfHBs0g89LUltPx8t9g1zTBoZHrhoPvBEW0n3c0S0l6QXXQ4Mab7ZMFvq-o7BD82bVKlumL7Dfo&disp=emb&realattid=ii_19c078cf73fa9b762ef1&zw" alt="Logo Surf Shop">
     <a href="{% url 'url_carrinho' %}" class="cart-link">🛒</a>
 </header>
-{% if messages %}
-  {% for message in messages %}
-    <div class="message {{ message.tags }}">
-        {{ message }}
-    </div>
-  {% endfor %}
-{% endif %}
-<div class="container">
-    {% for item in itens %}
-        <div class="card">
-            <a href="{% url 'url_item_detail' item.pk %}">
-                <img src="{{ item.imagem }}">
-            </a>
 
-            <div class="card-content">
-                <h3>{{ item.nome }}</h3>
-                <p class="price">R$ {{ item.preço }}</p>
+<div class="container">
+
+    <aside class="sidebar">
+        <h2>Menu</h2>
+        <a href="#">Pranchas</a>
+        <a href="#">Quilhas</a>
+        <a href="#">Leash</a>
+        <a href="#">Deck</a>
+        <a href="#">Capas</a>
+        <a href="#">Acessorios</a>
+    </aside>
+
+    <div class="cards">
+        {% for item in itens %}
+            <div class="card">
+                <a href="{% url 'url_item_detail' item.pk %}">
+                    <img src="{{ item.imagem }}">
+                </a>
+                <div class="card-content">
+                    <h3>{{ item.nome }}</h3>
+                    <p class="price">R$ {{ item.preço }}</p>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 </div>
 
 <footer>
