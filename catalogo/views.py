@@ -58,6 +58,7 @@ class DeletarItem(SuperAdminRequiredMixin,View):
             obj.delete()
             messages.success(request,"Item deletetado com sucesso")
 
+
 #----CARRINHO----
 class CreateCarrinho(View):
     def post(self,request,pk):
