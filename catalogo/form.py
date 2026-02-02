@@ -4,12 +4,18 @@ from .models import Item,Carrinho
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['nome','preço','descricao','imagem']
+        fields = ['nome','tipo','preço','descricao','imagem']
         widgets = {
             'nome': forms.TextInput(
                 attrs={
                     'class':'form-control',
                     'placeholder':'Nome do Item'
+                }
+            ),
+            'tipo': forms.Select(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Tipo de Item'
                 }
             ),
             'preço': forms.NumberInput(

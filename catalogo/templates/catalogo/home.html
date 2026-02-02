@@ -23,7 +23,7 @@
 
         /* HEADER */
         header {
-            background: linear-gradient(180deg, #0A4D68, #00B4D8);
+            background: linear-gradient(180deg, #00B4D8,#0A4D68 );
             padding: 20px;
             display: flex;
             align-items: center;
@@ -61,7 +61,7 @@
 
         /* SIDEBAR */
         .sidebar {
-            background-color: #e4e3e3;
+            background-color: #F1EEDC;
             color: #000000;
             padding: 20px;
 
@@ -173,12 +173,12 @@
 
     <aside class="sidebar">
         <h2>Menu</h2>
-        <a href="#">Pranchas</a>
-        <a href="#">Quilhas</a>
-        <a href="#">Leash</a>
-        <a href="#">Deck</a>
-        <a href="#">Capas</a>
-        <a href="#">Acessorios</a>
+        <a href="{% url 'url_home'%}?q=1">Pranchas</a>
+        <a href="{% url 'url_home'%}?q=4">Quilhas</a>
+        <a href="{% url 'url_home'%}?q=2">Leash</a>
+        <a href="{% url 'url_home'%}?q=3">Deck</a>
+        <a href="{% url 'url_home'%}?q=5">Capas</a>
+        <a href="{% url 'url_home'%}?q=6">Acessorios</a>
     </aside>
 
     <div class="cards">

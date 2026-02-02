@@ -3,6 +3,12 @@ from django.db import models
 class Tipos(models.Model):
     tipo_mercadoria = models.CharField(max_length= 30)
 
+    class Meta:
+        verbose_name_plural = "Tipos"
+    
+    def __str__(self):
+        return self.tipo_mercadoria
+
 class Item(models.Model):
     nome = models.CharField(max_length= 80)
     tipo = models.ForeignKey(Tipos,on_delete=(models.CASCADE))

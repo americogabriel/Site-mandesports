@@ -13,6 +13,12 @@ class Home(ListView):
     template_name = 'catalogo/home.html'
     context_object_name = 'itens'
 
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Item.objects.filter(tipo=query)
+        return Item.objects.all()
+
 #----ITEM----
 class ItemDetail(DetailView):
     model = Item
@@ -23,6 +29,10 @@ class CreateItem(SuperAdminRequiredMixin, FormView):
     form_class = ItemForm
     template_name = 'catalogo/create_item.html'
     success_url = reverse_lazy('url_listaritem')
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
     
 class UpdateItem(SuperAdminRequiredMixin,UpdateView):
     model = Item
