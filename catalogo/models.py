@@ -23,7 +23,7 @@ class Item(models.Model):
         return self.nome
 
 class Carrinho(models.Model):
-    session_key = models.CharField()
+    session_key = models.CharField(max_length=40)
     item = models.ForeignKey(Item,on_delete=(models.CASCADE))
 
     class Meta:
