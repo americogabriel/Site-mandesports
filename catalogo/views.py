@@ -19,7 +19,7 @@ class Home(ListView):
             return Item.objects.filter(tipo=query)
         return Item.objects.all()
 
-#----ITEM----
+# ----ITEM----
 class ItemDetail(DetailView):
     model = Item
     template_name = 'catalogo/detail_item.html'
@@ -59,7 +59,7 @@ class DeletarItem(SuperAdminRequiredMixin,View):
             messages.success(request,"Item deletetado com sucesso")
 
 
-#----CARRINHO----
+# ----CARRINHO----
 class CreateCarrinho(View):
     def post(self,request,pk):
         if not request.session.session_key:

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,32 +14,40 @@
             min-height: 100vh;
         }
 
-        /* HEADER */
+        /* ================= HEADER ================= */
         header {
             background: linear-gradient(180deg, #0A4D68, #00B4D8);
-            padding: 25px;
+            padding: 16px;
             text-align: center;
-            color: #FFFFFF;
         }
 
-        header a {
-            text-decoration: none;
-            color: white;
+        header img {
+            max-width: 160px;   /* largura máxima */
+            width: 100%;
+            height: auto;       /* mantém proporção */
+            display: block;
+            margin: 0 auto;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
+        /* Ajuste específico para celular */
+        @media (max-width: 480px) {
+            header {
+                padding: 12px;
+            }
+
+            header img {
+                max-width: 120px;
+            }
         }
 
-        /* CONTAINER */
+        /* ================= CONTAINER ================= */
         .container {
             max-width: 900px;
             margin: 40px auto;
             padding: 20px;
         }
 
-        /* ITEM DO CARRINHO */
+        /* ================= ITEM DO CARRINHO ================= */
         .carrinho-item {
             display: flex;
             align-items: center;
@@ -74,22 +83,16 @@
             color: #0A4D68;
         }
 
-        .carrinho-item h2 {
-            margin: 12px 0;
-            font-size: 1.1rem;
-            color: #0A4D68;
-        }
-
-        .carrinho-item .preco {
+        .preco {
             font-weight: bold;
             font-size: 1rem;
         }
 
-        .carrinho-item .acoes {
+        .acoes {
             text-align: right;
         }
 
-        .carrinho-item .excluir {
+        .excluir {
             padding: 8px 14px;
             background-color: #e74c3c;
             color: white;
@@ -99,12 +102,7 @@
             transition: background 0.3s;
         }
 
-        
-        .carrinho-item .excluir:hover {
-            background-color: #c0392b;
-        }
-
-        .carrinho-item a.excluir:hover {
+        .excluir:hover {
             background-color: #c0392b;
         }
 
@@ -114,7 +112,7 @@
             color: #555;
         }
 
-        /* MESSAGES */
+        /* ================= MESSAGES ================= */
         .messages {
             position: fixed;
             top: 20px;
@@ -142,8 +140,8 @@
         .message.error {
             background-color: #e74c3c;
         }
-    
-    /* RESUMO DO CARRINHO */
+
+        /* ================= RESUMO ================= */
         .resumo-carrinho {
             background-color: #ffffff;
             max-width: 900px;
@@ -156,11 +154,6 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-        }
-
-        .resumo-carrinho hr {
-            border: none;
-            border-top: 1px solid #ddd;
         }
 
         .valor-final {
@@ -178,7 +171,7 @@
             font-size: 1.5rem;
         }
 
-        /* BOTÃO WHATSAPP */
+        /* ================= BOTÃO WHATSAPP ================= */
         .contato {
             text-align: center;
         }
@@ -206,15 +199,13 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
         }
-
     </style>
 </head>
+
 <body>
 
 <header>
-    <a href="{% url 'url_home' %}">
-        <h1>🛒</h1>
-    </a>
+    <img src="{% static 'images/logo.png' %}" alt="Logo Mande">
 </header>
 
 {% if messages %}
@@ -229,7 +220,7 @@
     {% for carrinho in Carrinhos %}
         <div class="carrinho-item">
 
-            <a class="imagem" href="{% url 'url_item_detail' carrinho.item.pk %}">
+            <a href="{% url 'url_item_detail' carrinho.item.pk %}">
                 <img src="{{ carrinho.item.imagem }}">
             </a>
 
@@ -248,11 +239,9 @@
     {% empty %}
         <p class="vazio">Seu carrinho está vazio.</p>
     {% endfor %}
-
 </div>
-<div class="resumo-carrinho">
-    <hr>
 
+<div class="resumo-carrinho">
     <div class="valor-final">
         <p>Total do pedido</p>
         <span>R$ {{ valor_total|default:"0" }}</span>
@@ -262,10 +251,12 @@
         <a href="{{ mensagem_url }}" target="_blank">
             📲 Enviar pedido pelo WhatsApp
         </a>
+        <br><br>
+        <a href="{% url 'url_home' %}">
+            Voltar para Home
+        </a>
     </div>
 </div>
-
-    
 
 </body>
 </html>

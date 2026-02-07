@@ -25,9 +25,10 @@ SECRET_KEY = 'django-insecure-udxls8$+=iwx)#d5^t9nzmsuo418(lzu+(-qn#ha+rbq2zhp%m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['gabrielamerico.pythonanywhere.com']
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+ALLOWED_HOSTS = [
+                'gabrielamerico.pythonanywhere.com',
+                 '127.0.0.1'
+                 ]
 
 
 # Application definition
@@ -118,3 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'

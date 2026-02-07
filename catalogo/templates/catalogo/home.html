@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,7 +18,7 @@
             max-width: 100%;
             overflow-x: hidden;
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #F1EEDC;
+            background-color: #0A4D68;
         }
 
         a {
@@ -73,7 +74,7 @@
 
         /* SIDEBAR */
         .sidebar {
-            background-color: #F1EEDC;
+            background-color: #0A4D68;
             padding: 15px;
             display: flex;
             flex-direction: column;
@@ -81,6 +82,7 @@
         }
 
         .sidebar h2 {
+            color: #ffffff;
             text-align: center;
             margin-bottom: 10px;
             font-size: 1.1rem;
@@ -208,9 +210,8 @@
 </head>
 
 <body>
-
 <header>
-    <img src="https://mail.google.com/mail/u/0?ui=2&ik=01b5eb7e5f&attid=0.1&permmsgid=msg-f:1855615897135700768&th=19c078d3b4575b20&view=fimg&fur=ip&permmsgid=msg-f:1855615897135700768&sz=s0-l75-ft&attbid=ANGjdJ-7WNr5Krm3DHB8eUuOYvtvl8wMrV8y1Pyfa7SA1NBlC_LtUfHBs0g89LUltPx8t9g1zTBoZHrhoPvBEW0n3c0S0l6QXXQ4Mab7ZMFvq-o7BD82bVKlumL7Dfo&disp=emb&realattid=ii_19c078cf73fa9b762ef1&zw" alt="Logo Surf Shop">
+    <img src="{% static 'images/logo.png'%}" alt="Logo Surf Shop">
     <a href="{% url 'url_carrinho' %}" class="cart-link">🛒</a>
 </header>
 
