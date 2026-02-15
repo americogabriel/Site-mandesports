@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-udxls8$+=iwx)#d5^t9nzmsuo418(lzu+(-qn#ha+rbq2zhp%m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
                 'gabrielamerico.pythonanywhere.com',

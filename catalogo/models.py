@@ -14,13 +14,16 @@ class Item(models.Model):
     tipo = models.ForeignKey(Tipos,on_delete=(models.CASCADE))
     preço = models.DecimalField( max_digits= 10,decimal_places= 2)
     descricao = models.TextField()
-    imagem = models.URLField()
 
     class Meta:
         verbose_name_plural = "Itens"
         
     def __str__(self):
         return self.nome
+
+class ItemImagem(models.Model):
+    item = models.ForeignKey(Item,on_delete=(models.CASCADE),related_name='imagens')
+    imagem = models.ImageField(upload_to='itens/')
 
 class Carrinho(models.Model):
     session_key = models.CharField(max_length=40)

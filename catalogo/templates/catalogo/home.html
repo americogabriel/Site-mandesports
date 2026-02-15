@@ -229,10 +229,11 @@
 
     <div class="cards">
         {% for item in itens %}
-            <div class="card">
+            <!--<div class="card">
                 <a href="{% url 'url_item_detail' item.pk %}">
                     <img src="{{ item.imagem }}">
                 </a>
+            -->
                 <div class="card-content">
                     <h3>{{ item.nome }}</h3>
                     <p class="price">R$ {{ item.preço }}</p>

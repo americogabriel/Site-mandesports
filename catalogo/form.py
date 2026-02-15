@@ -4,7 +4,7 @@ from .models import Item,Carrinho
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['nome','tipo','preço','descricao','imagem']
+        fields = ['nome','tipo','preço','descricao']
         widgets = {
             'nome': forms.TextInput(
                 attrs={
@@ -28,12 +28,6 @@ class ItemForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'placeholder':' Descreva o Produto'
-                }
-            ),
-            'imagem': forms.TextInput(
-                attrs={
-                    'class':'form-control',
-                    'placeholder':'Digite a URL da imagem'
                 }
             ),
         }
