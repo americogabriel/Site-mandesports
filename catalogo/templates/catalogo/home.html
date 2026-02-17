@@ -229,11 +229,15 @@
 
     <div class="cards">
         {% for item in itens %}
-            <!--<div class="card">
+            <div class="card">
                 <a href="{% url 'url_item_detail' item.pk %}">
-                    <img src="{{ item.imagem }}">
+                    {% if item.imagens.first.imagem %}
+                        <img src="{{ item.imagens.first.imagem.url }}">
+                    {% else %}
+                        <p>falha ao buscar imagem</p>
+                    {% endif %}
                 </a>
-            -->
+            
                 <div class="card-content">
                     <h3>{{ item.nome }}</h3>
                     <p class="price">R$ {{ item.preço }}</p>

@@ -25,6 +25,9 @@ class ItemImagem(models.Model):
     item = models.ForeignKey(Item,on_delete=(models.CASCADE),related_name='imagens')
     imagem = models.ImageField(upload_to='itens/')
 
+    def __str__(self):
+        return self.item.nome
+
 class Carrinho(models.Model):
     session_key = models.CharField(max_length=40)
     item = models.ForeignKey(Item,on_delete=(models.CASCADE))
